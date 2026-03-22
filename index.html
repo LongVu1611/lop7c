@@ -782,6 +782,7 @@
     <li><a href="#" onclick="showPage('hinh-anh')" id="nav-hinh-anh">📷 Hình Ảnh</a></li>
     <li><a href="#" onclick="showPage('gian-hang')" id="nav-gian-hang">🍜 Gian Hàng</a></li>
     <li><a href="#" onclick="showPage('quiz')" id="nav-quiz">🎮 Quiz</a></li>
+    <li><a href="#" onclick="showPage('qrcode')" id="nav-qrcode">📱 QR Code</a></li>
   </ul>
 </nav>
 
@@ -1307,6 +1308,73 @@
       <div class="quiz-review">
         <h4>📋 Xem Lại Đáp Án</h4>
         <div id="review-list"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE: QR CODE -->
+<div id="page-qrcode" class="page">
+  <div style="background:linear-gradient(135deg,#0d47a1 0%,#1a73e8 100%);color:#fff;text-align:center;padding:60px 2rem 70px;position:relative;overflow:hidden;">
+    <div style="position:absolute;width:350px;height:350px;background:rgba(255,255,255,0.05);border-radius:50%;top:-100px;right:-80px;"></div>
+    <div style="position:absolute;width:250px;height:250px;background:rgba(255,255,255,0.05);border-radius:50%;bottom:-60px;left:-60px;"></div>
+    <div style="display:inline-block;background:#fbbc04;color:#1e2340;font-weight:700;font-size:0.8rem;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:1px;">📱 QUÉT ĐỂ TRUY CẬP</div>
+    <h2 style="font-family:'Baloo 2',cursive;font-size:2rem;font-weight:800;margin-bottom:10px;">QR Code Website Lớp 7C</h2>
+    <p style="opacity:0.9;font-size:1rem;max-width:480px;margin:0 auto;">Dùng điện thoại quét mã QR bên dưới để mở ngay website lớp 7C!</p>
+  </div>
+
+  <div style="max-width:700px;margin:0 auto;padding:40px 2rem 60px;">
+
+    <!-- QR IMAGE CARD -->
+    <div style="background:#fff;border-radius:24px;box-shadow:0 4px 24px rgba(0,0,0,0.08);overflow:hidden;margin-bottom:28px;">
+      <div style="background:linear-gradient(135deg,#f0f4ff,#e8eeff);padding:40px;display:flex;flex-direction:column;align-items:center;gap:20px;">
+        <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 8px 32px rgba(26,115,232,0.15);display:inline-block;">
+          <!-- Ảnh QR Code – đặt file qr_code.png cùng thư mục với index.html -->
+          <img src="qr_code.png"
+               alt="QR Code Website Lớp 7C"
+               id="qr-main-img"
+               style="width:220px;height:220px;object-fit:contain;display:block;border-radius:8px;"
+               onerror="document.getElementById('qr-main-img').style.display='none';document.getElementById('qr-empty').style.display='flex';" />
+          <div id="qr-empty"
+               style="width:220px;height:220px;display:none;flex-direction:column;align-items:center;justify-content:center;border:2.5px dashed #cbd5e1;border-radius:8px;gap:10px;">
+            <div style="font-size:3.5rem;">📱</div>
+            <div style="font-size:0.82rem;color:#6b7280;text-align:center;line-height:1.5;">
+              Đặt file <strong>qr_code.png</strong><br/>vào cùng thư mục với<br/><strong>index.html</strong>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:800;color:#1a73e8;margin-bottom:4px;">Website Lớp 7C</div>
+          <div style="font-size:0.85rem;color:#6b7280;">THCS Nguyễn Nghiêm · 2025–2026</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HƯỚNG DẪN -->
+    <div style="background:#fff;border-radius:20px;box-shadow:0 4px 24px rgba(0,0,0,0.07);padding:24px 28px;margin-bottom:20px;">
+      <h3 style="font-family:'Baloo 2',cursive;color:#1a73e8;font-size:1.15rem;margin-bottom:16px;">📖 Cách Quét QR Code</h3>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#1a73e8,#0d47a1);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">1</div>
+          <div style="font-size:0.95rem;color:#1e2340;">Mở <strong>ứng dụng Camera</strong> hoặc ứng dụng quét QR trên điện thoại</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#1a73e8,#0d47a1);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">2</div>
+          <div style="font-size:0.95rem;color:#1e2340;">Hướng camera vào <strong>mã QR</strong> ở trên cho đến khi xuất hiện thông báo</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#1a73e8,#0d47a1);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;flex-shrink:0;">3</div>
+          <div style="font-size:0.95rem;color:#1e2340;">Bấm vào <strong>đường link</strong> hiện lên → Website lớp 7C mở ngay!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTE -->
+    <div style="background:#fef3c7;border:1px solid #fbbc04;border-radius:14px;padding:14px 18px;display:flex;gap:10px;align-items:flex-start;">
+      <span style="font-size:1.2rem;flex-shrink:0;">💡</span>
+      <div style="font-size:0.88rem;color:#92400e;line-height:1.7;">
+        <strong>Dành cho giáo viên & phụ huynh:</strong> Quét mã QR này để xem toàn bộ thông tin lớp 7C – thành viên, hoạt động, gian hàng ẩm thực và nhiều hơn nữa!
       </div>
     </div>
 

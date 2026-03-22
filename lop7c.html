@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Website Lớp 7C – Trường THCS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --secondary: #fbbc04;
+      --accent: #34a853;
+      --danger: #ea4335;
+      --bg: #f0f4ff;
+      --card: #ffffff;
+      --text: #1e2340;
+      --muted: #6b7280;
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      background: linear-gradient(135deg, #1a73e8 0%, #0d47C1 100%);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(26,115,232,0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-logo span { color: var(--secondary); }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    /* ===== PAGES ===== */
+    .page { display: none; animation: fadeIn 0.4s ease; }
+    .page.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, #1a73e8 0%, #0d47C1 60%, #1565c0 100%);
+      color: #fff;
+      text-align: center;
+      padding: 80px 2rem 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      top: -100px; right: -100px;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      bottom: -80px; left: -80px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--secondary);
+      color: #1e2340;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat .num {
+      font-family: 'Baloo 2', cursive;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+
+    .hero-stat .label {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    /* ===== SECTION ===== */
+    .section { padding: 48px 2rem; max-width: 960px; margin: 0 auto; }
+
+    .section-title {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 28px;
+      font-size: 0.95rem;
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(26,115,232,0.15);
+    }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+
+    /* ===== INTRO LỚP ===== */
+    .info-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+    .info-icon { font-size: 1.2rem; margin-top: 2px; }
+    .info-label { font-weight: 700; color: var(--primary); }
+    .info-val { color: var(--text); }
+
+    /* ===== THÀNH VIÊN ===== */
+    .member-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .member-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(26,115,232,0.18); }
+
+    .member-card .click-hint {
+      position: absolute; top: 10px; right: 12px;
+      font-size: 0.7rem; color: var(--muted);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .member-card:hover .click-hint { opacity: 1; }
+
+    .avatar {
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .member-name { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+    .member-role {
+      font-size: 0.78rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .role-lop-truong { background: #fef3c7; color: #92400e; }
+    .role-bi-thu    { background: #dbeafe; color: #1e40af; }
+    .role-hoc-sinh  { background: #f3f4f6; color: #374151; }
+
+    /* ===== GVCN CARD ===== */
+    .gvcn-card {
+      background: linear-gradient(135deg, #0d47C1 0%, #1a73e8 60%, #1565c0 100%);
+      border-radius: 20px;
+      padding: 28px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 36px;
+      box-shadow: 0 8px 32px rgba(26,115,232,0.3);
+      flex-wrap: wrap;
+    }
+
+    .gvcn-avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      flex-shrink: 0;
+      border: 3px solid rgba(255,255,255,0.4);
+    }
+
+    .gvcn-info { flex: 1; }
+    .gvcn-label {
+      font-size: 0.75rem; font-weight: 700;
+      background: var(--secondary); color: #1e2340;
+      padding: 2px 10px; border-radius: 20px;
+      display: inline-block; margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .gvcn-name { font-family: 'Baloo 2', cursive; font-size: 1.6rem; font-weight: 800; margin-bottom: 6px; }
+    .gvcn-row { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; opacity: 0.9; margin-bottom: 4px; }
+    .gvcn-stats {
+      display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap;
+    }
+    .gvcn-stat {
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px; padding: 8px 16px; text-align: center;
+    }
+    .gvcn-stat .n { font-family: 'Baloo 2'; font-size: 1.3rem; font-weight: 800; color: var(--secondary); }
+    .gvcn-stat .l { font-size: 0.72rem; opacity: 0.8; }
+
+    /* ===== MODAL POPUP ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      z-index: 500;
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.show { display: flex; animation: fadeIn 0.25s ease; }
+
+    .modal {
+      background: #fff;
+      border-radius: 24px;
+      width: 90%; max-width: 420px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+
+    .modal-header {
+      padding: 28px 24px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute; top: 14px; right: 16px;
+      background: #f3f4f6; border: none; border-radius: 50%;
+      width: 32px; height: 32px; cursor: pointer;
+      font-size: 1rem; color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: #e5e7eb; }
+
+    .modal-avatar {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem; font-weight: 800; color: #fff;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .modal-name { font-family: 'Baloo 2', cursive; font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
+
+    .modal-body { padding: 0 24px 24px; }
+
+    .modal-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 0.9rem;
+    }
+    .modal-row:last-child { border-bottom: none; }
+    .modal-row .icon { font-size: 1.1rem; width: 24px; text-align: center; }
+    .modal-row .lbl { color: var(--muted); width: 90px; flex-shrink: 0; }
+    .modal-row .val { font-weight: 600; color: var(--text); }
+
+    .modal-hobby {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;
+    }
+    .hobby-tag {
+      background: #eff6ff; color: #1e40af;
+      padding: 3px 10px; border-radius: 20px;
+      font-size: 0.78rem; font-weight: 600;
+    }
+
+    /* ===== HOẠT ĐỘNG ===== */
+    .activity-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      transition: transform 0.2s;
+    }
+
+    .activity-card:hover { transform: translateY(-4px); }
+
+    .activity-banner {
+      height: 100px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+
+    .activity-body { padding: 16px; }
+    .activity-title { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+    .activity-desc { font-size: 0.85rem; color: var(--muted); }
+    .activity-date {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      height: 150px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .gallery-item:hover { transform: scale(1.05); }
+
+    .gallery-modal {
+      position: relative;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 95vw;
+      max-height: 90vh;
+    }
+
+    /* ===== GIAN HÀNG ===== */
+    .food-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      transition: transform 0.2s;
+    }
+
+    .food-card:hover { transform: translateY(-4px); }
+
+    .food-banner {
+      height: 100px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+
+    .food-body { padding: 14px; }
+    .food-name { font-weight: 700; margin-bottom: 4px; }
+    .food-desc { font-size: 0.82rem; color: var(--muted); margin-bottom: 8px; }
+    .food-price { font-weight: 800; color: var(--danger); font-size: 1rem; }
+
+    /* ===== LIÊN HỆ ===== */
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+
+    .contact-form label { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; display: block; }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--primary); }
+
+    .contact-form textarea { resize: vertical; min-height: 100px; }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 12px 28px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn:hover { background: #1557b0; transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .contact-info-card {
+      background: linear-gradient(135deg, #1a73e8, #0d47C1);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .contact-info-card h3 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+    }
+
+    .contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.9rem; }
+
+    /* purchase controls */
+    .food-action { display:flex; gap:8px; align-items:center; margin-top:8px; }
+    .qty-input { width:50px; padding:4px; border:1px solid #e5e7eb; border-radius:4px; }
+
+    .order-list { margin-top:24px; }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: none;
+      z-index: 999;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #1e2340;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.85rem;
+      margin-top: 60px;
+    }
+
+    footer span { color: var(--secondary); font-weight: 700; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; height: auto; flex-direction: column; padding: 10px; gap: 8px; }
+      .nav-links { justify-content: center; }
+      .hero { padding: 50px 1rem 60px; }
+      .section { padding: 32px 1rem; }
+    }
+
+    /* ===== QUIZ ===== */
+    .quiz-hero {
+      background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 60%, #6d28d9 100%);
+      color: #fff;
+      text-align: center;
+      padding: 60px 2rem 70px;
+      position: relative;
+      overflow: hidden;
+    }
+    .quiz-hero::before {
+      content: '🎮';
+      position: absolute;
+      font-size: 12rem;
+      opacity: 0.05;
+      top: -20px; right: -20px;
+    }
+    .quiz-hero h2 {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .quiz-hero p { opacity: 0.9; font-size: 1rem; max-width: 480px; margin: 0 auto; }
+
+    .quiz-wrap { max-width: 680px; margin: 0 auto; padding: 40px 2rem 60px; }
+
+    /* START SCREEN */
+    .quiz-start {
+      text-align: center;
+      background: #fff;
+      border-radius: 24px;
+      padding: 40px 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .quiz-start .big-emoji { font-size: 4rem; margin-bottom: 16px; }
+    .quiz-start h3 { font-family: 'Baloo 2', cursive; font-size: 1.6rem; font-weight: 800; color: #4f46e5; margin-bottom: 8px; }
+    .quiz-start p { color: var(--muted); margin-bottom: 24px; line-height: 1.7; }
+    .quiz-rules {
+      background: #f5f3ff;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    .quiz-rules li { color: #4f46e5; font-size: 0.9rem; margin-bottom: 6px; list-style: none; padding-left: 4px; }
+    .quiz-rules li::before { content: '✅ '; }
+    .btn-quiz-start {
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      color: #fff;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(124,58,237,0.4);
+    }
+    .btn-quiz-start:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,58,237,0.5); }
+
+    /* QUESTION CARD */
+    .quiz-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      display: none;
+    }
+    .quiz-card.active { display: block; animation: fadeIn 0.35s ease; }
+
+    .quiz-progress-bar {
+      background: #ede9fe;
+      border-radius: 20px;
+      height: 8px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .quiz-progress-fill {
+      background: linear-gradient(90deg, #7c3aed, #4f46e5);
+      height: 100%;
+      border-radius: 20px;
+      transition: width 0.5s ease;
+    }
+    .quiz-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .quiz-score-badge {
+      background: #f5f3ff;
+      color: #4f46e5;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+    .quiz-question {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+    .quiz-question .q-emoji { font-size: 1.6rem; margin-right: 8px; }
+
+    .quiz-options { display: flex; flex-direction: column; gap: 12px; }
+
+    .quiz-option {
+      border: 2px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 14px 18px;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: left;
+      background: #fff;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .quiz-option:hover:not(:disabled) { border-color: #7c3aed; background: #f5f3ff; transform: translateX(4px); }
+    .quiz-option.correct { border-color: #34a853; background: #dcfce7; color: #166534; }
+    .quiz-option.wrong   { border-color: #ea4335; background: #fee2e2; color: #991b1b; }
+    .quiz-option.reveal  { border-color: #34a853; background: #dcfce7; color: #166534; opacity: 0.7; }
+    .quiz-option:disabled { cursor: default; }
+
+    .option-letter {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: #ede9fe;
+      color: #4f46e5;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .quiz-option.correct .option-letter { background: #34a853; color: #fff; }
+    .quiz-option.wrong   .option-letter { background: #ea4335; color: #fff; }
+    .quiz-option.reveal  .option-letter { background: #34a853; color: #fff; }
+
+    .quiz-feedback {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .quiz-feedback.correct { background: #dcfce7; color: #166534; display: block; }
+    .quiz-feedback.wrong   { background: #fee2e2; color: #991b1b; display: block; }
+
+    .btn-next {
+      margin-top: 20px;
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: none;
+      transition: transform 0.2s;
+    }
+    .btn-next:hover { transform: translateY(-1px); }
+    .btn-next.visible { display: inline-block; animation: fadeIn 0.3s ease; }
+
+    /* RESULT SCREEN */
+    .quiz-result {
+      text-align: center;
+      background: #fff;
+      border-radius: 24px;
+      padding: 40px 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      display: none;
+    }
+    .quiz-result.active { display: block; animation: fadeIn 0.4s ease; }
+    .result-emoji { font-size: 4rem; margin-bottom: 12px; }
+    .result-title { font-family: 'Baloo 2', cursive; font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+    .result-score-circle {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      color: #fff;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      margin: 20px auto;
+      box-shadow: 0 8px 24px rgba(124,58,237,0.4);
+    }
+    .result-score-circle .big { font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800; line-height: 1; }
+    .result-score-circle .small { font-size: 0.75rem; opacity: 0.85; }
+    .result-msg { color: var(--muted); margin-bottom: 28px; font-size: 0.95rem; line-height: 1.7; }
+    .result-stars { font-size: 2rem; margin-bottom: 16px; letter-spacing: 4px; }
+
+    .quiz-review {
+      text-align: left;
+      margin-top: 24px;
+      border-top: 2px solid #f3f4f6;
+      padding-top: 20px;
+    }
+    .quiz-review h4 { font-family: 'Baloo 2', cursive; color: #4f46e5; margin-bottom: 14px; font-size: 1.1rem; }
+    .review-item {
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .review-item.ok  { background: #dcfce7; color: #166534; }
+    .review-item.bad { background: #fee2e2; color: #991b1b; }
+    .review-item .ri { flex-shrink: 0; font-size: 1rem; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">🎓 <span>Lớp 7C</span></div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" class="active" id="nav-home">🏠 Trang Chủ</a></li>
+    <li><a href="#" onclick="showPage('gioi-thieu')" id="nav-gioi-thieu">📚 Giới Thiệu</a></li>
+    <li><a href="#" onclick="showPage('thanh-vien')" id="nav-thanh-vien">👥 Thành Viên</a></li>
+    <li><a href="#" onclick="showPage('hoat-dong')" id="nav-hoat-dong">🌟 Hoạt Động</a></li>
+    <li><a href="#" onclick="showPage('hinh-anh')" id="nav-hinh-anh">📷 Hình Ảnh</a></li>
+    <li><a href="#" onclick="showPage('gian-hang')" id="nav-gian-hang">🍜 Gian Hàng</a></li>
+    <li><a href="#" onclick="showPage('quiz')" id="nav-quiz">🎮 Quiz</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE: TRANG CHỦ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-badge">⭐ NĂM HỌC 2025 – 2026</div>
+    <h1>Chào mừng đến với<br/>Lớp 7C!</h1>
+    <p>Năng động – Sáng tạo – Đoàn kết. Chúng mình là một tập thể vui vẻ, luôn cố gắng học tốt và rèn luyện mỗi ngày.</p>
+      <div class="hero-stats">
+      <div class="hero-stat"><div class="num">34</div><div class="label">Học Sinh</div></div>
+      <div class="hero-stat"><div class="num">4</div><div class="label">Hoạt Động</div></div>
+      <div class="hero-stat"><div class="num">3</div><div class="label">Giải Thưởng</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">✨ Khám Phá Website Của Chúng Mình</div>
+    <p class="section-sub">Bấm vào các mục bên dưới để tìm hiểu thêm về lớp 7C nhé!</p>
+    <div class="grid-3">
+      <div class="card" style="cursor:pointer;border-left:4px solid #1a73e8;" onclick="showPage('gioi-thieu')">
+        <div style="font-size:2rem;margin-bottom:8px;">📚</div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">Giới Thiệu Lớp</div>
+        <div style="color:var(--muted);font-size:0.85rem;">Thông tin về lớp và GVCN</div>
+      </div>
+      <div class="card" style="cursor:pointer;border-left:4px solid #fbbc04;" onclick="showPage('thanh-vien')">
+        <div style="font-size:2rem;margin-bottom:8px;">👥</div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">Thành Viên</div>
+        <div style="color:var(--muted);font-size:0.85rem;">Danh sách 35 bạn học sinh</div>
+      </div>
+      <div class="card" style="cursor:pointer;border-left:4px solid #34a853;" onclick="showPage('hoat-dong')">
+        <div style="font-size:2rem;margin-bottom:8px;">🌟</div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">Hoạt Động Nổi Bật</div>
+        <div style="color:var(--muted);font-size:0.85rem;">Sự kiện & thành tích</div>
+      </div>
+      <div class="card" style="cursor:pointer;border-left:4px solid #ea4335;" onclick="showPage('hinh-anh')">
+        <div style="font-size:2rem;margin-bottom:8px;">📷</div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">Hình Ảnh – Video</div>
+        <div style="color:var(--muted);font-size:0.85rem;">Bộ sưu tập kỷ niệm</div>
+      </div>
+      <div class="card" style="cursor:pointer;border-left:4px solid #ff6d00;" onclick="showPage('gian-hang')">
+        <div style="font-size:2rem;margin-bottom:8px;">🍜</div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">Gian Hàng Ẩm Thực</div>
+        <div style="color:var(--muted);font-size:0.85rem;">Món ngon của lớp mình</div>
+      </div>
+      <div class="card" style="cursor:pointer;border-left:4px solid #7c3aed;" onclick="showPage('quiz')">
+        <div style="font-size:2rem;margin-bottom:8px;">🎮</div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">Quiz Lớp 7C</div>
+        <div style="color:var(--muted);font-size:0.85rem;">Bạn hiểu lớp mình đến đâu?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: GIỚI THIỆU LỚP -->
+<div id="page-gioi-thieu" class="page">
+  <div class="section">
+    <div class="section-title">📚 Giới Thiệu Lớp</div>
+    <p class="section-sub">Một vài thông tin cơ bản về tập thể lớp 7C của chúng mình</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="font-family:'Baloo 2';color:var(--primary);margin-bottom:16px;">🏫 Thông Tin Lớp</h3>
+        <div class="info-row"><span class="info-icon">📌</span><div><span class="info-label">Tên lớp: </span><span class="info-val">7C</span></div></div>
+        <div class="info-row"><span class="info-icon">🏛️</span><div><span class="info-label">Trường: </span><span class="info-val">THCS Nguyễn Nghiêm</span></div></div>
+        <div class="info-row"><span class="info-icon">📅</span><div><span class="info-label">Năm học: </span><span class="info-val">2025 – 2026</span></div></div>
+        <div class="info-row"><span class="info-icon">👨‍🏫</span><div><span class="info-label">GVCN: </span><span class="info-val">Cô Phạm Thị Tân</span></div></div>
+        <div class="info-row"><span class="info-icon">👨‍👩‍👧‍👦</span><div><span class="info-label">Sĩ số: </span><span class="info-val">34 học sinh</span></div></div>
+        <div class="info-row"><span class="info-icon">🏠</span><div><span class="info-label">Phòng học: </span><span class="info-val">P.14</span></div></div>
+      </div>
+      <div class="card">
+        <h3 style="font-family:'Baloo 2';color:var(--primary);margin-bottom:16px;">💬 Lời Giới Thiệu</h3>
+        <p style="line-height:1.8;color:var(--muted);font-size:0.95rem;">
+          Lớp 7C là một tập thể đoàn kết, năng động và đầy nhiệt huyết. Chúng mình luôn cố gắng học tập tốt, rèn luyện đạo đức và tham gia tích cực các hoạt động của trường.
+        </p>
+        <p style="line-height:1.8;color:var(--muted);font-size:0.95rem;margin-top:12px;">
+          Với tinh thần "Học – Chơi – Cống hiến", lớp 7C tự hào đã đạt nhiều thành tích trong học tập lẫn phong trào. 💪
+        </p>
+        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="background:#dbeafe;color:#1e40af;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600;">🎯 Năng Động</span>
+          <span style="background:#dcfce7;color:#166534;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600;">🤝 Đoàn Kết</span>
+          <span style="background:#fef3c7;color:#92400e;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600;">✨ Sáng Tạo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: THÀNH VIÊN -->
+<div id="page-thanh-vien" class="page">
+  <div class="section">
+    <div class="section-title">👥 Thành Viên Lớp 7C</div>
+    <p class="section-sub">Giáo viên chủ nhiệm và các bạn học sinh trong lớp – Nhấn vào thẻ để xem thông tin chi tiết!</p>
+
+    <!-- GVCN -->
+    <div class="gvcn-card">
+      <div class="gvcn-avatar">👩‍🏫</div>
+      <div class="gvcn-info">
+        <div class="gvcn-label">GIÁO VIÊN CHỦ NHIỆM</div>
+        <div class="gvcn-name">Phạm Thị Tân</div>
+        <div class="gvcn-row">📚 Môn chuyên: Lịch Sử</div>
+        <!-- <div class="gvcn-row">📅 Kinh nghiệm: 15 năm giảng dạy</div> -->
+        <!-- <div class="gvcn-row">📧 lan.nguyen@truong.edu.vn</div> -->
+        <div class="gvcn-stats">
+          <!-- <div class="gvcn-stat"><div class="n">15</div><div class="l">Năm kinh nghiệm</div></div> -->
+          <div class="gvcn-stat"><div class="n">34</div><div class="l">Học sinh lớp 7C</div></div>
+          <!-- <div class="gvcn-stat"><div class="n">A+</div><div class="l">Xếp loại lớp</div></div> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- BAN CÁN SỰ -->
+    <h3 style="font-family:'Baloo 2';color:var(--primary);margin-bottom:16px;">🏅 Ban Cán Sự</h3>
+    <div class="grid-3" style="margin-bottom:32px;">
+      <div class="member-card" onclick="openModal('an')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#fbbc04,#f59e0b);">T</div>
+        <div class="member-name">Trần Vũ Bảo Trâm</div>
+        <span class="member-role role-lop-truong">👑 Lớp Trưởng</span>
+      </div>
+      <div class="member-card" onclick="openModal('binh')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#1a73e8,#0d47C1);">H</div>
+        <div class="member-name">Huỳnh Mai Phương Nhi</div>
+        <span class="member-role role-bi-thu">📋 Bí Thư</span>
+      </div>
+      <div class="member-card" onclick="openModal('chau')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#34a853,#1a7431);">L</div>
+        <div class="member-name">Lê Minh Hòa</div>
+        <span class="member-role role-bi-thu">📚 Lớp Phó HT</span>
+      </div>
+    </div>
+
+    <!-- HỌC SINH -->
+    <h3 style="font-family:'Baloo 2';color:var(--primary);margin-bottom:16px;">🎒 Học Sinh</h3>
+    <div class="grid-3">
+      <div class="member-card" onclick="openModal('dung')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);">Đ</div>
+        <div class="member-name">Đặng Hải Anh</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('em')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#ec4899,#db2777);">H</div>
+        <div class="member-name">Hồ Bảo Anh</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('giang')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#f97316,#ea580c);">N</div>
+        <div class="member-name">Nguyễn Phúc Gia Bảo</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('hung')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#06b6d4,#0891b2);">P</div>
+        <div class="member-name">Phan Nhã Băng</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('khanh')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#84cc16,#65a30d);">L</div>
+        <div class="member-name">Lê Bảo Châu</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('long')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#14b8a6,#0d9488);">T</div>
+        <div class="member-name">Trần Ngọc Đan Châu</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <!-- Additional placeholder students to reach tổng sĩ số 34 (31 học sinh + 3 cán sự) -->
+      <div class="member-card" onclick="openModal('s1')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#ef4444,#f97316);">T</div>
+        <div class="member-name">Trần Phan Nhật Duy</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s2')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#f59e0b,#f97316);">N</div>
+        <div class="member-name">Nguyễn Thị Thùy Dương</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s3')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#fbbf24,#f97316);">L</div>
+        <div class="member-name">Lê Võ Ngọc Uy</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s4')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#34d399,#10b981);">T</div>
+        <div class="member-name">Trần Thị Kim Huệ</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s5')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#60a5fa,#3b82f6);">L</div>
+        <div class="member-name">Lê Phúc Hưng</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s6')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);">N</div>
+        <div class="member-name">Nguyễn Hồng Khải</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s7')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#fb7185,#f43f5e);">N</div>
+        <div class="member-name">Nguyễn Anh Khôi</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s8')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#fde68a,#fef3c7);">L</div>
+        <div class="member-name">Lê Đức Kiệt</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s9')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#c7f9cc,#86efac);">V</div>
+        <div class="member-name">Võ Trần Tuấn Kiệt</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s10')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#bfdbfe,#93c5fd);">H</div>
+        <div class="member-name">Huỳnh Nhật Long</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s11')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#fbcfe8,#f5b7d6);">H</div>
+        <div class="member-name">Hoàng Anh Minh</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s12')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#fde68a,#facc15);">P</div>
+        <div class="member-name">Phan Nguyễn Thảo Ngân</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s13')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#34d399,#10b981);">T</div>
+        <div class="member-name">Tô Nguyễn Gia Nghĩa</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s14')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#60a5fa,#3b82f6);">H</div>
+        <div class="member-name">Huỳnh Lê Bảo Ngọc</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s15')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);">H</div>
+        <div class="member-name">Huỳnh Khôi Ngô</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s16')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#fb7185,#f43f5e);">N</div>
+        <div class="member-name">Nguyễn Đức Nhân</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s17')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">B</div>
+        <div class="member-name">Bùi Anh Nhất</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s18')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#c7f9cc,#86efac);">N</div>
+        <div class="member-name">Nguyễn Đỗ Khánh Vy</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s19')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#bfdbfe,#93c5fd);">K</div>
+        <div class="member-name">Kiều Hoàng Phương Nhi</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s20')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#fbcfe8,#f5b7d6);">P</div>
+        <div class="member-name">Phạm Bá Thiên Phú</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s21')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#fde68a,#facc15);">V</div>
+        <div class="member-name">Võ Nguyễn Minh Quân</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s22')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#34d399,#10b981);">N</div>
+        <div class="member-name">Nguyễn Lê Anh Thái</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s23')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#60a5fa,#3b82f6);">P</div>
+        <div class="member-name">Phạm Thị Minh Thư</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s24')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);">N</div>
+        <div class="member-name">Nguyễn Ngọc Huyền Trang</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+      <div class="member-card" onclick="openModal('s25')">
+        <span class="click-hint">👆 Xem thêm</span>
+        <div class="avatar" style="background:linear-gradient(135deg,#fb7185,#f43f5e);">Đ</div>
+        <div class="member-name">Đỗ Thị Ánh Tuyến</div>
+        <span class="member-role role-hoc-sinh">🎒 Học Sinh</span>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--muted);margin-top:20px;font-size:0.85rem;">✏️ <em>Hãy thêm tên các bạn còn lại vào đây nhé!</em></p>
+  </div>
+</div>
+
+<!-- PAGE: HOẠT ĐỘNG NỔI BẬT -->
+<div id="page-hoat-dong" class="page">
+  <div class="section">
+    <div class="section-title">🌟 Hoạt Động Nổi Bật</div>
+    <p class="section-sub">Những sự kiện đáng nhớ của lớp 7C trong năm học này</p>
+    <div class="grid-2">
+      <!-- <div class="activity-card"> -->
+        <!-- <div class="activity-banner" style="background:linear-gradient(135deg,#fef3c7,#fde68a);">🏆</div> -->
+        <!-- <div class="activity-body">
+          <div class="activity-title">Cuộc Thi Học Sinh Giỏi Cấp Trường</div>
+          <div class="activity-desc">Lớp 7C đạt 3 giải nhất trong các môn Toán, Văn, Tiếng Anh. Tự hào lắm!</div>
+          <div class="activity-date">📅 Tháng 11/2024</div>
+        </div> -->
+      <!-- </div> -->
+      <div class="activity-card">
+        <div class="activity-banner" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);cursor:pointer;" onclick="openGalleryModal('dabanh.jpg', 'Giải Bóng Đá Lớp 7')"><img src="dabanh.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Đá Banh"/></div>
+        <div class="activity-body">
+          <div class="activity-title">Giải Bóng Đá Lớp 7</div>
+          <div class="activity-desc">Đội bóng lớp 7C xuất sắc vào chung kết và giành huy chương vàng.</div>
+          <!-- <div class="activity-date">📅 Tháng 10/2024</div> -->
+        </div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-banner" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);cursor:pointer;" onclick="openGalleryModal('baovemoitruong.jpg', 'Hoạt Động Bảo Vệ Môi Trường')"><img src="baovemoitruong.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Bảo vệ môi trường"/></div>
+        <div class="activity-body">
+          <div class="activity-title">Hoạt Động Bảo Vệ Môi Trường</div>
+          <div class="activity-desc">Lớp trồng 20 cây xanh trong khuôn viên trường nhân ngày Môi Trường Thế Giới.</div>
+          <!-- <div class="activity-date">📅 Tháng 6/2024</div> -->
+        </div>
+      </div>
+      <!-- <div class="activity-card">
+        <div class="activity-banner" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);">🎨</div>
+        <div class="activity-body">
+          <div class="activity-title">Hội Thi Văn Nghệ Chào Mừng 20/11</div>
+          <div class="activity-desc">Lớp biểu diễn tiết mục múa và ca hát, nhận được nhiều lời khen từ thầy cô.</div>
+          <div class="activity-date">📅 Tháng 11/2024</div>
+        </div>
+      </div> -->
+      <div class="activity-card">
+        <div class="activity-banner" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);cursor:pointer;" onclick="openGalleryModal('ngayhoidocsach.jpg', 'Ngày Hội Đọc Sách')"><img src="ngayhoidocsach.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Ngày Hội Đọc Sách"/></div>
+        <div class="activity-body">
+          <div class="activity-title">Ngày Hội Đọc Sách</div>
+          <div class="activity-desc">Lớp tổ chức góc đọc sách mini, giới thiệu hơn 50 cuốn sách hay đến các bạn.</div>
+          <!-- <div class="activity-date">📅 Tháng 4/2025</div> -->
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-banner" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);cursor:pointer;" onclick="openGalleryModal('ngayhoistem.jpg', 'Ngày Làm STEM')"><img src="ngayhoistem.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Ngày Hội STEM"/></div>
+        <div class="activity-body">
+          <div class="activity-title">Ngày Làm STEM</div>
+          <div class="activity-desc">Nhóm lớp 7C trình bày dự án mô hình nguyên tử đơn giản và tất cả các bạn đều đạt được điểm cao trong môn hóa.</div>
+          <!-- <div class="activity-date">📅 Tháng 3/2025</div> -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: HÌNH ẢNH – VIDEO -->
+<div id="page-hinh-anh" class="page">
+  <div class="section">
+    <div class="section-title">📷 Hình Ảnh – Video</div>
+    <p class="section-sub">Bộ sưu tập kỷ niệm của lớp 7C</p>
+    <div class="gallery-grid">
+      <div class="gallery-item" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);" title="Văn nghệ 03/02" onclick="openGalleryModal('vannghe.jpg', 'Văn nghệ 03/02')"><img src="vannghe.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Văn nghệ 03/02"/></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);" title="Đá Banh" onclick="openGalleryModal('dabanh.jpg', 'Đá Banh')"><img src="dabanh.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Đá Banh"/></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);" title="Trung Thu" onclick="openGalleryModal('trungthu.jpg', 'Trung Thu')"><img src="trungthu.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Trung Thu"/></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);" title="Học Nhóm" onclick="openGalleryModal('hocnhom.jpg', 'Học Nhóm')"><img src="hocnhom.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Học Nhóm"/></div>
+    </div>
+    <div class="card" style="margin-top:28px;">
+      <!-- <h3 style="font-family:'Baloo 2';margin-bottom:8px;">🎬 Video Lớp Mình</h3>
+      <p style="opacity:0.7;font-size:0.9rem;margin-bottom:12px;">Các video kỷ niệm của lớp 7C – Đăng tải sớm thôi!</p>
+      <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:30px;text-align:center;font-size:2rem;">▶️ 🎞️ 📹</div> -->
+    </div>
+    <p style="text-align:center;color:var(--muted);margin-top:16px;font-size:0.85rem;">📌 <em>Nhấn vào từng ô để xem ảnh (thêm ảnh thật vào bằng thẻ &lt;img&gt; nhé!)</em></p>
+  </div>
+</div>
+
+<!-- PAGE: GIAN HÀNG ẨM THỰC -->
+<div id="page-gian-hang" class="page">
+  <div class="section">
+    <div class="section-title">🍜 Gian Hàng Ẩm Thực</div>
+    <p class="section-sub">Những món ngon do các bạn lớp 7C tự làm – Hội chợ trường năm 2024</p>
+    <div class="grid-3">
+      <div class="food-card">
+        <div class="food-banner" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);"><img src="trasua.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Ngọc mễ du hành(Bắp xào)"/></div>
+        <div class="food-body">
+          <div class="food-name">Ngọc mễ du hành(Bắp xào)</div>
+          <div class="food-desc">Vị bắp xào hòa quyện với nhau , thơm mùi của bắp.</div>
+          <div class="food-price">15.000đ</div>
+          <div class="food-action">
+            <input type="number" min="1" value="1" class="qty-input"/>
+            <button class="btn buy-btn" onclick="startOrder('Ngọc mễ du hành(Bắp xào)', this)">Mua</button>
+          </div>
+        </div>
+      </div>
+      <div class="food-card">
+        <div class="food-banner" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);"><img src="keobong.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Tuyệt phẩm hoàng kim(xúc xích và cá viên chiên)"/></div>
+        <div class="food-body">
+          
+          <div class="food-name">Tuyệt phẩm hoàng kim(xúc xích và cá viên chiên)</div>
+          <div class="food-desc">Xúc xích và cá viên chiên thơm ngon.</div>
+          <div class="food-price">10.000đ</div>
+          <div class="food-action">
+            <input type="number" min="1" value="1" class="qty-input"/>
+            <button class="btn buy-btn" onclick="startOrder('Tuyệt phẩm hoàng kim(xúc xích và cá viên chiên)', this)">Mua</button>
+          </div>
+        </div>
+      </div>
+      <div class="food-card">
+        <div class="food-banner" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);"><img src="xienque.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Xiên cá viên chiên"/></div>
+        <div class="food-body">
+          <div class="food-name">Đệ nhất kinh kì(Bánh tráng nướng)</div>
+          <div class="food-desc">Xiên que rất đa dạng, ngon miệng.</div>
+          <div class="food-price">10.000đ</div>
+          <div class="food-action">
+            <input type="number" min="1" value="1" class="qty-input"/>
+            <button class="btn buy-btn" onclick="startOrder('Đệ nhất kinh kì(Bánh tráng nướng)', this)">Mua</button>
+          </div>
+        </div>
+      </div>
+      <div class="food-card">
+        <div class="food-banner" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);"><img src="snacktron.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Snack trộn"/></div>
+        <div class="food-body">
+          <div class="food-name">Vũ điệu giòn giã(snack trộn)</div>
+          <div class="food-desc">Snack nhiều vị, giòn rụm.</div>
+          <div class="food-price">12.000đ</div>
+          <div class="food-action">
+            <input type="number" min="1" value="1" class="qty-input"/>
+            <button class="btn buy-btn" onclick="startOrder('Vũ điệu giòn giã(snack trộn)', this)">Mua</button>
+          </div>
+        </div>
+      </div>
+      <div class="food-card">
+        <div class="food-banner" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);"><img src="tratac.webp" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="Kim quất trà(trà tắc xí muội)"/></div>
+        <div class="food-body">
+          <div class="food-name">Kim quất trà(trà tắc xí muội)</div>
+          <div class="food-desc">Giải khát mát lạnh.</div>
+          <div class="food-price">10.000đ</div>
+          <div class="food-action">
+            <input type="number" min="1" value="1" class="qty-input"/>
+            <button class="btn buy-btn" onclick="startOrder('Kim quất trà(trà tắc xí muội)', this)">Mua</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="order-list" class="order-list">
+      <h3>Đơn hàng</h3>
+      <ul id="orders">
+        <!-- orders appended here -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- PAGE: QUIZ -->
+<div id="page-quiz" class="page">
+  <div class="quiz-hero">
+    <h2>🎮 Quiz Về Lớp 7C</h2>
+    <p>Bạn hiểu lớp mình đến đâu rồi? Hãy thử sức với 10 câu hỏi thú vị!</p>
+  </div>
+  <div class="quiz-wrap">
+
+    <!-- START SCREEN -->
+    <div class="quiz-start" id="quiz-start">
+      <div class="big-emoji">🧠</div>
+      <h3>Bắt Đầu Quiz!</h3>
+      <p>Kiểm tra xem bạn có phải là người hiểu rõ lớp 7C nhất không nhé. Gồm các câu hỏi về thầy cô, bạn bè, và các hoạt động của lớp!</p>
+      <ul class="quiz-rules">
+        <li>10 câu hỏi về lớp 7C</li>
+        <li>Mỗi câu trả lời đúng được 10 điểm</li>
+        <li>Có giải thích sau mỗi câu</li>
+        <li>Xem kết quả và đánh giá ở cuối</li>
+      </ul>
+      <button class="btn-quiz-start" onclick="startQuiz()">🚀 Bắt Đầu Ngay!</button>
+    </div>
+
+    <!-- QUESTION CARDS (rendered by JS) -->
+    <div id="quiz-questions"></div>
+
+    <!-- RESULT SCREEN -->
+    <div class="quiz-result" id="quiz-result">
+      <div class="result-emoji" id="result-emoji"></div>
+      <div class="result-title" id="result-title"></div>
+      <div class="result-stars" id="result-stars"></div>
+      <div class="result-score-circle">
+        <div class="big" id="result-score-num"></div>
+        <div class="small">/ 100 điểm</div>
+      </div>
+      <div class="result-msg" id="result-msg"></div>
+      <button class="btn-quiz-start" onclick="restartQuiz()" style="margin-bottom:16px;">🔄 Chơi Lại</button>
+      <div class="quiz-review">
+        <h4>📋 Xem Lại Đáp Án</h4>
+        <div id="review-list"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL POPUP -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-header" id="modal-header">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-avatar" id="modal-avatar"></div>
+      <div class="modal-name" id="modal-name"></div>
+      <div id="modal-role-badge"></div>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="order-overlay">
+  <div class="modal" id="order-modal-box">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeOrderModal()">✕</button>
+      <div class="modal-name" id="order-item"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-row">
+        <span class="lbl">Số lượng</span>
+        <span class="val" id="order-qty"></span>
+      </div>
+      <div class="modal-row">
+        <span class="lbl">Tên người mua</span>
+        <input type="text" id="buyer-name" style="flex:1;padding:6px;border:1px solid #e5e7eb;border-radius:4px;"/>
+      </div>
+      <div class="modal-row">
+        <span class="lbl">Địa chỉ lớp</span>
+        <input type="text" id="buyer-class" style="flex:1;padding:6px;border:1px solid #e5e7eb;border-radius:4px;"/>
+      </div>
+      <div style="text-align:center;margin-top:12px;">
+        <button class="btn" onclick="placeOrder()">✅ Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY MODAL -->
+<div class="modal-overlay" id="gallery-overlay" onclick="closeGalleryModal(event)">
+  <div class="gallery-modal" id="gallery-modal-box">
+    <button class="modal-close" onclick="closeGalleryModal()">✕</button>
+    <img id="gallery-image" style="max-width:90%;max-height:80vh;object-fit:contain;border-radius:8px;" alt="Gallery Image"/>
+    <p id="gallery-title" style="text-align:center;margin-top:12px;color:#333;"></p>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Tin nhắn đã được gửi! Cảm ơn bạn nhé 💙</div>
+
+<!-- FOOTER -->
+<footer>
+  Made with ❤️ by <span>Lớp 7C</span> · Năm học 2025–2026 · Trường THCS Nguyễn Nghiêm
+</footer>
+
+<script>
+  // ===== NAVIGATION =====
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function sendMsg() {
+    const name = document.getElementById('cf-name').value.trim();
+    const msg  = document.getElementById('cf-msg').value.trim();
+    if (!name || !msg) { alert('Vui lòng điền đầy đủ họ tên và nội dung nhé!'); return; }
+    document.getElementById('cf-name').value = '';
+    document.getElementById('cf-contact').value = '';
+    document.getElementById('cf-msg').value = '';
+    const t = document.getElementById('toast');
+    t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 3000);
+  }
+
+  // ===== MEMBER DATA =====
+  const members = {
+    an: {
+      name: 'Trần Vũ Bảo Trâm',
+      initial: 'T',
+      gradient: 'linear-gradient(135deg,#fbbc04,#f59e0b)',
+      role: '👑 Lớp Trưởng',
+      roleStyle: 'background:#fef3c7;color:#92400e;',
+      ngaySinh: '12/03/2012',
+      queQuan: 'TP. Hồ Chí Minh',
+      hocLuc: '⭐ Giỏi',
+      hanhKiem: '✅ Tốt',
+      sothich: ['Đọc sách', 'Lập trình', 'Bóng đá'],
+      motto: '"Cố gắng hôm nay để tự hào ngày mai!"'
+    },
+    binh: {
+      name: 'Huỳnh Mai Phương Nhi',
+      initial: 'H',
+      gradient: 'linear-gradient(135deg,#1a73e8,#0d47C1)',
+      role: '📋 Bí Thư',
+      roleStyle: 'background:#dbeafe;color:#1e40af;',
+      ngaySinh: '05/07/2012',
+      queQuan: 'Bình Dương',
+      hocLuc: '⭐ Xuất sắc',
+      hanhKiem: '✅ Tốt',
+      sothich: ['Vẽ', 'Ca hát', 'Nấu ăn'],
+      motto: '"Nụ cười là vũ khí mạnh nhất!"'
+    },
+    chau: {
+      name: 'Lê Minh Hòa',
+      initial: 'L',
+      gradient: 'linear-gradient(135deg,#34a853,#1a7431)',
+      role: '📚 Lớp Phó HT',
+      roleStyle: 'background:#dbeafe;color:#1e40af;',
+      ngaySinh: '20/09/2012',
+      queQuan: 'Đồng Nai',
+      hocLuc: '⭐ Giỏi',
+      hanhKiem: '✅ Tốt',
+      sothich: ['Toán học', 'Chess', 'Bơi lội'],
+      motto: '"Học để biết, biết để làm!"'
+    },
+    dung: {
+      name: 'Đặng Hải Anh',
+      initial: 'Đ',
+      gradient: 'linear-gradient(135deg,#8b5cf6,#7c3aed)',
+      role: '🎒 Học Sinh',
+      roleStyle: 'background:#f3f4f6;color:#374151;',
+      ngaySinh: '14/01/2012',
+      queQuan: 'TP. Hồ Chí Minh',
+      hocLuc: '⭐ Khá',
+      hanhKiem: '✅ Tốt',
+      sothich: ['Nhảy', 'Vẽ tranh', 'Đọc truyện'],
+      motto: '"Mỗi ngày là một cơ hội mới!"'
+    },
+    em: {
+      name: 'Hồ Bảo Anh',
+      initial: 'H',
+      gradient: 'linear-gradient(135deg,#ec4899,#db2777)',
+      role: '🎒 Học Sinh',
+      roleStyle: 'background:#f3f4f6;color:#374151;',
+      ngaySinh: '08/11/2012',
+      queQuan: 'Long An',
+      hocLuc: '⭐ Khá',
+      hanhKiem: '✅ Tốt',
+      sothich: ['Game', 'Bóng rổ', 'Âm nhạc'],
+      motto: '"Chơi hết mình, học hết sức!"'
+    },
+    giang: {
+      name: 'Nguyễn Phúc Gia Bảo',
+      initial: 'N',
+      gradient: 'linear-gradient(135deg,#f97316,#ea580c)',
+      role: '🎒 Học Sinh',
+      roleStyle: 'background:#f3f4f6;color:#374151;',
+      ngaySinh: '22/04/2012',
+      queQuan: 'Tiền Giang',
+      hocLuc: '⭐ Giỏi',
+      hanhKiem: '✅ Tốt',
+      sothich: ['Nấu ăn', 'Làm bánh', 'Yoga'],
+      motto: '"Yêu đời, yêu người, yêu bản thân!"'
+    },
+    hung: {
+      name: 'Phan Nhã Băng',
+      initial: 'P',
+      gradient: 'linear-gradient(135deg,#06b6d4,#0891b2)',
+      role: '🎒 Học Sinh',
+      roleStyle: 'background:#f3f4f6;color:#374151;',
+      ngaySinh: '30/06/2012',
+      queQuan: 'Bà Rịa – Vũng Tàu',
+      hocLuc: '⭐ Khá',
+      hanhKiem: '✅ Khá',
+      sothich: ['Lướt ván', 'Cờ vua', 'Khoa học'],
+      motto: '"Khó khăn là cơ hội để trưởng thành!"'
+    },
+    khanh: {
+      name: 'Lê Bảo Châu',
+      initial: 'L',
+      gradient: 'linear-gradient(135deg,#84cc16,#65a30d)',
+      role: '🎒 Học Sinh',
+      roleStyle: 'background:#f3f4f6;color:#374151;',
+      ngaySinh: '17/02/2012',
+      queQuan: 'TP. Hồ Chí Minh',
+      hocLuc: '⭐ Xuất sắc',
+      hanhKiem: '✅ Tốt',
+      sothich: ['Piano', 'Nhiếp ảnh', 'Đọc sách'],
+      motto: '"Âm nhạc là ngôn ngữ của tâm hồn!"'
+    },
+    long: {
+      name: 'Trần Ngọc Đan Châu',
+      initial: 'T',
+      gradient: 'linear-gradient(135deg,#14b8a6,#0d9488)',
+      role: '🎒 Học Sinh',
+      roleStyle: 'background:#f3f4f6;color:#374151;',
+      ngaySinh: '03/08/2012',
+      queQuan: 'Cần Thơ',
+      hocLuc: '⭐ Khá',
+      hanhKiem: '✅ Tốt',
+      sothich: ['Bơi lội', 'Vẽ kỹ thuật', 'Robotics'],
+      motto: '"Kiên trì là chìa khóa của thành công!"'
+    }
+    ,
+    s1: { name: 'Trần Phan Nhật Duy', initial: 'T', gradient: 'linear-gradient(135deg,#ef4444,#f97316)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '01/02/2012', queQuan: 'Hà Nội', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Đọc sách','Bóng đá'], motto: '"Luôn tiến bước"' },
+    s2: { name: 'Nguyễn Thị Thùy Dương', initial: 'N', gradient: 'linear-gradient(135deg,#f59e0b,#f97316)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '12/03/2012', queQuan: 'Hải Phòng', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Vẽ','Âm nhạc'], motto: '"Sáng tạo mỗi ngày"' },
+    s3: { name: 'Lê Võ Ngọc Uy', initial: 'L', gradient: 'linear-gradient(135deg,#fbbf24,#f97316)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '05/05/2012', queQuan: 'Nam Định', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Toán','Chess'], motto: '"Không ngừng học hỏi"' },
+    s4: { name: 'Trần Thị Kim Huệ', initial: 'T', gradient: 'linear-gradient(135deg,#34d399,#10b981)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '20/04/2012', queQuan: 'Bình Dương', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Nhảy','Đọc truyện'], motto: '"Tin vào bản thân"' },
+    s5: { name: 'Lê Phúc Hưng', initial: 'L', gradient: 'linear-gradient(135deg,#60a5fa,#3b82f6)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '11/06/2012', queQuan: 'Quảng Ninh', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Bóng rổ','Game'], motto: '"Hết mình với đam mê"' },
+    s6: { name: 'Nguyễn Hồng Khải', initial: 'N', gradient: 'linear-gradient(135deg,#a78bfa,#7c3aed)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '29/07/2012', queQuan: 'Hà Nam', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Vẽ tranh','Làm đồ thủ công'], motto: '"Thử rồi mới biết"' },
+    s7: { name: 'Nguyễn Anh Khôi', initial: 'N', gradient: 'linear-gradient(135deg,#fb7185,#f43f5e)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '03/03/2012', queQuan: 'Thừa Thiên Huế', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Cờ vua','Đi bộ'], motto: '"Bước nhỏ, tiến xa"' },
+    s8: { name: 'Lê Đức Kiệt', initial: 'L', gradient: 'linear-gradient(135deg,#fde68a,#fef3c7)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '17/08/2012', queQuan: 'Hải Dương', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Đọc sách','Piano'], motto: '"Yêu đời, yêu học"' },
+    s9: { name: 'Võ Trần Tuấn Kiệt', initial: 'V', gradient: 'linear-gradient(135deg,#c7f9cc,#86efac)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '09/09/2012', queQuan: 'Vĩnh Phúc', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Lập trình','Robotics'], motto: '"Khéo tay, hay làm"' },
+    s10: { name: 'Huỳnh Nhật Long', initial: 'H', gradient: 'linear-gradient(135deg,#bfdbfe,#93c5fd)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '21/02/2012', queQuan: 'Hải Phòng', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Nấu ăn','Làm bánh'], motto: '"Chăm chỉ là lợi thế"' },
+    s11: { name: 'Hoàng Anh Minh', initial: 'H', gradient: 'linear-gradient(135deg,#fbcfe8,#f5b7d6)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '02/01/2012', queQuan: 'Nghệ An', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Âm nhạc','Bóng đá'], motto: '"Chơi hết mình, học hết sức"' },
+    s12: { name: 'Phan Nguyễn Thảo Ngân', initial: 'P', gradient: 'linear-gradient(135deg,#fde68a,#facc15)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '15/04/2012', queQuan: 'Thanh Hóa', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Vẽ','Đọc sách'], motto: '"Mỗi ngày một điều hay"' },
+    s13: { name: 'Tô Nguyễn Gia Nghĩa', initial: 'T', gradient: 'linear-gradient(135deg,#34d399,#10b981)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '06/06/2012', queQuan: 'Đồng Nai', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Bơi lội','Toán'], motto: '"Kiên trì và bền bỉ"' },
+    s14: { name: 'Huỳnh Lê Bảo Ngọc', initial: 'H', gradient: 'linear-gradient(135deg,#60a5fa,#3b82f6)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '28/10/2012', queQuan: 'Bến Tre', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Nhiếp ảnh','Du lịch'], motto: '"Nhìn thế giới bằng trái tim"' },
+    s15: { name: 'Huỳnh Khôi Ngô', initial: 'H', gradient: 'linear-gradient(135deg,#a78bfa,#7c3aed)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '07/07/2012', queQuan: 'Phú Thọ', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Cờ vua','Khoa học'], motto: '"Hỏi để hiểu"' },
+    s16: { name: 'Nguyễn Đức Nhân', initial: 'N', gradient: 'linear-gradient(135deg,#fb7185,#f43f5e)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '04/11/2012', queQuan: 'Hà Giang', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Nhảy','Vẽ'], motto: '"Vui học, vui chơi"' },
+    s17: { name: 'Bùi Anh Nhất', initial: 'B', gradient: 'linear-gradient(135deg,#fef3c7,#fde68a)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '19/09/2012', queQuan: 'Thái Bình', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Robotics','Game'], motto: '"Sáng tạo không ngừng"' },
+    s18: { name: 'Nguyễn Đỗ Khánh Vy', initial: 'N', gradient: 'linear-gradient(135deg,#c7f9cc,#86efac)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '13/12/2012', queQuan: 'Quảng Nam', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Đọc sách','Viết nhật ký'], motto: '"Ghi lại từng khoảnh khắc"' },
+    s19: { name: 'Kiều Hoàng Phương Nhi', initial: 'K', gradient: 'linear-gradient(135deg,#bfdbfe,#93c5fd)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '23/03/2012', queQuan: 'Bình Phước', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Âm nhạc','Bóng đá'], motto: '"Tinh thần đồng đội"' },
+    s20: { name: 'Phạm Bá Thiên Phú', initial: 'P', gradient: 'linear-gradient(135deg,#fbcfe8,#f5b7d6)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '30/05/2012', queQuan: 'Kon Tum', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Nấu ăn','Làm bánh'], motto: '"Chia sẻ là hạnh phúc"' },
+    s21: { name: 'Võ Nguyễn Minh Quân', initial: 'V', gradient: 'linear-gradient(135deg,#fde68a,#facc15)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '25/01/2012', queQuan: 'Gia Lai', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Đạp xe','Vẽ'], motto: '"Khỏe mạnh mỗi ngày"' },
+    s22: { name: 'Nguyễn Lê Anh Thái', initial: 'N', gradient: 'linear-gradient(135deg,#34d399,#10b981)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '02/02/2012', queQuan: 'Quảng Ngãi', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Yoga','Đọc sách'], motto: '"Bình tĩnh và kiên nhẫn"' },
+    s23: { name: 'Phạm Thị Minh Thư', initial: 'P', gradient: 'linear-gradient(135deg,#60a5fa,#3b82f6)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '08/08/2012', queQuan: 'Sóc Trăng', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Bơi','Chơi đàn'], motto: '"Hôm nay phải tốt hơn hôm qua"' },
+    s24: { name: 'Nguyễn Ngọc Huyền Trang', initial: 'N', gradient: 'linear-gradient(135deg,#a78bfa,#7c3aed)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '16/04/2012', queQuan: 'Yên Bái', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Làm vườn','Thêu'], motto: '"Nhỏ nhưng bền"' },
+    s25: { name: 'Đỗ Thị Ánh Tuyến', initial: 'Đ', gradient: 'linear-gradient(135deg,#fb7185,#f43f5e)', role: '🎒 Học Sinh', roleStyle: 'background:#f3f4f6;color:#374151;', ngaySinh: '10/10/2012', queQuan: 'Phú Yên', hocLuc: '⭐ Khá', hanhKiem: '✅ Tốt', sothich: ['Chụp ảnh','Du lịch'], motto: '"Khám phá và học hỏi"' }
+  };
+
+  // ===== MODAL FUNCTIONS =====
+  function openModal(key) {
+    const m = members[key];
+    if (!m) return;
+
+    document.getElementById('modal-avatar').style.background = m.gradient;
+    document.getElementById('modal-avatar').textContent = m.initial;
+    document.getElementById('modal-name').textContent = m.name;
+    document.getElementById('modal-role-badge').innerHTML =
+      `<span style="font-size:0.8rem;padding:4px 12px;border-radius:20px;font-weight:700;${m.roleStyle}">${m.role}</span>`;
+
+    const hobbies = m.sothich.map(h => `<span class="hobby-tag">${h}</span>`).join('');
+
+    document.getElementById('modal-body').innerHTML = `
+      <div class="modal-row">
+        <span class="icon">🎂</span>
+        <span class="lbl">Ngày sinh</span>
+        <span class="val">${m.ngaySinh}</span>
+      </div>
+      <div class="modal-row">
+        <span class="icon">📍</span>
+        <span class="lbl">Quê quán</span>
+        <span class="val">${m.queQuan}</span>
+      </div>
+      <div class="modal-row">
+        <span class="icon">📊</span>
+        <span class="lbl">Học lực</span>
+        <span class="val">${m.hocLuc}</span>
+      </div>
+      <div class="modal-row">
+        <span class="icon">💎</span>
+        <span class="lbl">Hạnh kiểm</span>
+        <span class="val">${m.hanhKiem}</span>
+      </div>
+      <div class="modal-row" style="flex-direction:column;align-items:flex-start;gap:8px;">
+        <div style="display:flex;gap:12px;align-items:center;width:100%;">
+          <span class="icon">🎯</span>
+          <span class="lbl">Sở thích</span>
+        </div>
+        <div class="modal-hobby">${hobbies}</div>
+      </div>
+      <div class="modal-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+        <div style="display:flex;gap:12px;align-items:center;">
+          <span class="icon">💬</span>
+          <span class="lbl">Châm ngôn</span>
+        </div>
+        <div style="font-style:italic;color:var(--primary);font-weight:600;font-size:0.88rem;padding-left:36px;">${m.motto}</div>
+      </div>
+    `;
+
+    document.getElementById('modal-overlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // add handler for order modal
+  // ===== QUIZ =====
+  const quizData = [
+    {
+      q: '👩‍🏫 Giáo viên chủ nhiệm lớp 7C là ai?',
+      options: ['Cô Nguyễn Thị Lan', 'Cô Phạm Thị Tân', 'Thầy Lê Văn Hùng', 'Cô Trần Thị Bích'],
+      answer: 1,
+      explain: '✅ Đúng rồi! GVCN lớp 7C là Cô Phạm Thị Tân – dạy môn Lịch Sử.'
+    },
+    {
+      q: '📚 Cô Phạm Thị Tân dạy môn gì?',
+      options: ['Toán', 'Ngữ Văn', 'Lịch Sử', 'Tiếng Anh'],
+      answer: 2,
+      explain: '✅ Cô Phạm Thị Tân là giáo viên môn Lịch Sử và là GVCN lớp 7C.'
+    },
+    {
+      q: '👑 Ai là Lớp Trưởng của lớp 7C?',
+      options: ['Huỳnh Mai Phương Nhi', 'Lê Minh Hòa', 'Trần Vũ Bảo Trâm', 'Nguyễn Hồng Khải'],
+      answer: 2,
+      explain: '✅ Trần Vũ Bảo Trâm là Lớp Trưởng của lớp 7C.'
+    },
+    {
+      q: '📋 Ai đảm nhận vai trò Bí Thư lớp 7C?',
+      options: ['Lê Minh Hòa', 'Huỳnh Mai Phương Nhi', 'Trần Vũ Bảo Trâm', 'Bùi Anh Nhất'],
+      answer: 1,
+      explain: '✅ Huỳnh Mai Phương Nhi là Bí Thư của lớp 7C.'
+    },
+    {
+      q: '🏫 Lớp 7C thuộc trường nào?',
+      options: ['THCS Nguyễn Trãi', 'THCS Lê Lợi', 'THCS Nguyễn Nghiêm', 'THCS Trần Phú'],
+      answer: 2,
+      explain: '✅ Lớp 7C thuộc trường THCS Nguyễn Nghiêm.'
+    },
+    {
+      q: '👨‍👩‍👧‍👦 Lớp 7C có bao nhiêu học sinh?',
+      options: ['30', '32', '35', '34'],
+      answer: 3,
+      explain: '✅ Lớp 7C có tổng cộng 34 học sinh.'
+    },
+    {
+      q: '📅 Năm học của lớp 7C là năm nào?',
+      options: ['2023 – 2024', '2024 – 2025', '2025 – 2026', '2026 – 2027'],
+      answer: 2,
+      explain: '✅ Lớp 7C đang học trong năm học 2025 – 2026.'
+    },
+    {
+      q: '🍜 Món nào KHÔNG có trong gian hàng lớp 7C?',
+      options: ['Ngọc mễ du hành(Bắp xào)', 'Đệ nhất kinh kì(Bánh tráng nướng)', 'Bánh tráng trộn', 'Vũ điệu giòn giã(snack trộn)'],
+      answer: 2,
+      explain: '✅ Bánh tráng trộn không có trong gian hàng lớp 7C. Các món có gồm: Ngọc mễ du hành(Bắp xào), Đệ nhất kinh kì(Bánh tráng nướng), Vũ điệu giòn giã(snack trộn), Kim quất trà(trà tắc xí muội).'
+    },
+    {
+      q: '📚 Lớp Phó Học Tập của lớp 7C là ai?',
+      options: ['Huỳnh Mai Phương Nhi', 'Trần Vũ Bảo Trâm', 'Lê Minh Hòa', 'Nguyễn Đức Nhân'],
+      answer: 2,
+      explain: '✅ Lê Minh Hòa là Lớp Phó Học Tập của lớp 7C.'
+    },
+    {
+      q: '🏠 Lớp 7C học ở phòng nào?',
+      options: ['P.101 – Nhà B', 'P.201 – Nhà A', 'P.301 – Nhà C', 'P.102 – Nhà A'],
+      answer: 1,
+      explain: '✅ Lớp 7C học tại Phòng 201 – Nhà A của trường THCS Nguyễn Nghiêm.'
+    }
+  ];
+
+  let currentQ = 0;
+  let score = 0;
+  let answered = false;
+  let userAnswers = [];
+
+  function startQuiz() {
+    currentQ = 0; score = 0; answered = false; userAnswers = [];
+    document.getElementById('quiz-start').style.display = 'none';
+    document.getElementById('quiz-result').classList.remove('active');
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const container = document.getElementById('quiz-questions');
+    container.innerHTML = '';
+    const q = quizData[currentQ];
+    const letters = ['A', 'B', 'C', 'D'];
+    const pct = Math.round((currentQ / quizData.length) * 100);
+
+    const card = document.createElement('div');
+    card.className = 'quiz-card active';
+    card.innerHTML = `
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" style="width:${pct}%"></div>
+      </div>
+      <div class="quiz-meta">
+        <span>Câu ${currentQ + 1} / ${quizData.length}</span>
+        <span class="quiz-score-badge">⭐ ${score} điểm</span>
+      </div>
+      <div class="quiz-question"><span class="q-emoji"></span>${q.q}</div>
+      <div class="quiz-options">
+        ${q.options.map((opt, i) => `
+          <button class="quiz-option" onclick="selectAnswer(${i})" id="opt-${i}">
+            <span class="option-letter">${letters[i]}</span>
+            ${opt}
+          </button>
+        `).join('')}
+      </div>
+      <div class="quiz-feedback" id="quiz-feedback"></div>
+      <button class="btn-next" id="btn-next" onclick="nextQuestion()">
+        ${currentQ + 1 === quizData.length ? '🏁 Xem Kết Quả' : 'Câu Tiếp Theo →'}
+      </button>
+    `;
+    container.appendChild(card);
+  }
+
+  function selectAnswer(idx) {
+    if (answered) return;
+    answered = true;
+    const q = quizData[currentQ];
+    const isCorrect = idx === q.answer;
+    if (isCorrect) score += 10;
+    userAnswers.push({ q: q.q, chosen: idx, correct: q.answer, ok: isCorrect, explain: q.explain, options: q.options });
+
+    // Style options
+    q.options.forEach((_, i) => {
+      const btn = document.getElementById('opt-' + i);
+      btn.disabled = true;
+      if (i === q.answer) btn.classList.add('correct');
+      else if (i === idx && !isCorrect) btn.classList.add('wrong');
+    });
+
+    // Feedback
+    const fb = document.getElementById('quiz-feedback');
+    fb.className = 'quiz-feedback ' + (isCorrect ? 'correct' : 'wrong');
+    fb.textContent = isCorrect ? ('🎉 Chính xác! ' + q.explain) : ('❌ Sai rồi! ' + q.explain);
+
+    // Show next button
+    const btn = document.getElementById('btn-next');
+    btn.classList.add('visible');
+
+    // Update score badge
+    document.querySelector('.quiz-score-badge').textContent = '⭐ ' + score + ' điểm';
+  }
+
+  function nextQuestion() {
+    currentQ++;
+    answered = false;
+    if (currentQ >= quizData.length) {
+      showResult();
+    } else {
+      renderQuestion();
+    }
+  }
+
+  function showResult() {
+    document.getElementById('quiz-questions').innerHTML = '';
+    const result = document.getElementById('quiz-result');
+    result.classList.add('active');
+
+    const pct = score; // out of 100
+    let emoji, title, stars, msg;
+    if (pct === 100)      { emoji='🏆'; title='Xuất Sắc Tuyệt Đối!'; stars='⭐⭐⭐⭐⭐'; msg='Bạn hiểu lớp 7C hơn cả chính mình rồi đó! Thật tuyệt vời! 🎊'; }
+    else if (pct >= 80)   { emoji='🥇'; title='Rất Giỏi!'; stars='⭐⭐⭐⭐'; msg='Bạn hiểu rõ lớp 7C lắm rồi đó! Chỉ còn một vài điều nhỏ cần khám phá thêm thôi! 💪'; }
+    else if (pct >= 60)   { emoji='🥈'; title='Khá Tốt!'; stars='⭐⭐⭐'; msg='Không tệ chút nào! Bạn đã biết khá nhiều về lớp 7C rồi. Hãy tìm hiểu thêm nhé! 😊'; }
+    else if (pct >= 40)   { emoji='🥉'; title='Cần Cố Thêm!'; stars='⭐⭐'; msg='Bạn mới chỉ biết một phần về lớp 7C thôi. Đọc lại website và thử lại nhé! 📚'; }
+    else                  { emoji='😅'; title='Ôi Trời!'; stars='⭐'; msg='Có vẻ như bạn chưa tìm hiểu kỹ về lớp 7C lắm. Đừng nản, thử lại nào! 💡'; }
+
+    document.getElementById('result-emoji').textContent = emoji;
+    document.getElementById('result-title').textContent = title;
+    document.getElementById('result-stars').textContent = stars;
+    document.getElementById('result-score-num').textContent = score;
+    document.getElementById('result-msg').textContent = msg;
+
+    // Review list
+    const reviewEl = document.getElementById('review-list');
+    reviewEl.innerHTML = userAnswers.map(a => `
+      <div class="review-item ${a.ok ? 'ok' : 'bad'}">
+        <span class="ri">${a.ok ? '✅' : '❌'}</span>
+        <div>
+          <strong>${a.q}</strong><br/>
+          ${a.ok ? 'Bạn trả lời đúng!' : `Bạn chọn: <em>${a.options[a.chosen]}</em> – Đáp án đúng: <strong>${a.options[a.correct]}</strong>`}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function restartQuiz() {
+    document.getElementById('quiz-result').classList.remove('active');
+    document.getElementById('quiz-start').style.display = 'block';
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOrderModal(); });
+
+  document.getElementById('order-overlay').addEventListener('click', e => { if (e.target === document.getElementById('order-overlay')) closeOrderModal(); });
+
+  // ===== GALLERY LIGHTBOX =====
+  function openGalleryModal(imageSrc, title) {
+    document.getElementById('gallery-image').src = imageSrc;
+    document.getElementById('gallery-title').textContent = title;
+    document.getElementById('gallery-overlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGalleryModal(event) {
+    if (event && event.target !== document.getElementById('gallery-overlay')) return;
+    document.getElementById('gallery-overlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('gallery-overlay').classList.contains('show')) closeGalleryModal(); });
+
+  // ===== ORDER LOGIC =====
+  const foodPrices = {
+    'Ngọc mễ du hành(Bắp xào)': 15000,
+    'Bánh ngọt': 10000,
+    'Tuyệt phẩm hoàng kim(xúc xích và cá viên chiên)': 10000,
+    'Đệ nhất kinh kì(Bánh tráng nướng)': 10000,
+    'Vũ điệu giòn giã(snack trộn)': 12000,
+    'Kim quất trà(trà tắc xí muội)': 10000
+  };
+
+  let orders = [];
+  let currentItem = '';
+  let currentQty = 1;
+  let currentPrice = 0;
+
+  function startOrder(item, btn) {
+    currentItem = item;
+    currentPrice = foodPrices[item] || 0;
+    const qtyInput = btn.parentElement.querySelector('.qty-input');
+    currentQty = qtyInput ? parseInt(qtyInput.value) : 1;
+    document.getElementById('order-item').textContent = item;
+    document.getElementById('order-qty').textContent = currentQty;
+    document.getElementById('buyer-name').value = '';
+    document.getElementById('buyer-class').value = '';
+    document.getElementById('order-overlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeOrderModal() {
+    document.getElementById('order-overlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  function placeOrder() {
+    const name = document.getElementById('buyer-name').value.trim();
+    const cls = document.getElementById('buyer-class').value.trim();
+    if (!name || !cls) { alert('Vui lòng nhập tên và địa chỉ lớp.'); return; }
+    const total = currentQty * currentPrice;
+    orders.push({ item: currentItem, qty: currentQty, price: currentPrice, total: total, name, cls });
+    updateOrderList();
+    closeOrderModal();
+    showToast(`✅ Đơn hàng của ${name} đã được xác nhận!`);
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.style.display = 'block';
+    setTimeout(() => {
+      toast.style.display = 'none';
+    }, 5000);
+  }
+
+  function updateOrderList() {
+    const ul = document.getElementById('orders');
+    ul.innerHTML = orders.map((o, idx) => {
+      const priceFormatted = o.price.toLocaleString('vi-VN');
+      const totalFormatted = o.total.toLocaleString('vi-VN');
+      return `<li style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #e5e7eb;"><span>${o.name} (${o.cls}) đã đặt ${o.qty} x ${o.item} (${priceFormatted}đ/cái) = <strong>${totalFormatted}đ</strong></span><button onclick="deleteOrder(${idx})" style="background:#ea4335;color:white;border:none;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.85rem;">✕ Xóa</button></li>`;
+    }).join('');
+  }
+
+  function deleteOrder(idx) {
+    if (confirm('Bạn chắc chứ? Xóa đơn hàng này?')) {
+      orders.splice(idx, 1);
+      updateOrderList();
+      showToast('✅ Đơn hàng đã bị xóa!');
+    }
+  }
+</script>
